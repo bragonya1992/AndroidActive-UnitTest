@@ -40,6 +40,9 @@ public class Team extends Model{
     public AlertLevel alertLevel;
 
 
+    public Team(){
+        super();
+    }
     public Team(String teamId, String vendorID, String competition, String competition_id, String teamName, String originalID, AlertLevel alertLevel) {
         this.teamId = teamId;
         this.vendorID = vendorID;

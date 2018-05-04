@@ -1,32 +1,14 @@
-package com.example.brayany.testsyncadapter;
+package com.example.brayany.testsyncadapter.source;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-
-import com.activeandroid.query.Delete;
-import com.activeandroid.query.Select;
 import com.example.brayany.testsyncadapter.model.Team;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Modifier;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class Builder {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        deteletAll();
-        saveATeam();
-        List<Team> teams = getAll();
-        teams.clear();
-    }
-
-
-    public void saveATeam(){
+    public static Team getTeam(){
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC).create();
         Team team = gson.fromJson(
@@ -44,17 +26,6 @@ public class MainActivity extends AppCompatActivity {
                         "      ]\n" +
                         "   }\n" +
                         "}",Team.class);
-        team.alertLevel.save();
-        team.save();
-    }
-
-    public static List<Team> getAll() {
-        return new Select()
-                .from(Team.class)
-                .execute();
-    }
-
-    public void deteletAll(){
-        new Delete().from(Team.class).execute();
+        return team;
     }
 }

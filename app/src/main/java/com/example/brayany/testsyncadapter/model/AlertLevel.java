@@ -18,6 +18,10 @@ public class AlertLevel extends Model{
     @Column
     public List<String> customAlert = null;
 
+    public AlertLevel(){
+        super();
+    }
+
     public AlertLevel(String level, List<String> customAlert) {
         super();
         this.level = level;
