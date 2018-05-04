@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.brayany.testsyncadapter">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:name=".application.MasterApp">
+
+        <meta-data android:name="AA_DB_NAME" android:value="FoxDB" />
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.example.brayany.testsyncadapter.model.Team, com.example.brayany.testsyncadapter.model.AlertLevel" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".syncadapter.SyncService"
+            android:exported="true"
+            android:process=":sync">
+        <intent-filter>
+            <action android:name="android.content.SyncAdapter"/>
+        </intent-filter>
+        <meta-data android:name="android.content.SyncAdapter"
+            android:resource="@xml/syncadapter" />
+    </service>
+    </application>
+
+</manifest>
